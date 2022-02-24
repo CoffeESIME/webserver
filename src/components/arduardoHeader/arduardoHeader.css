@@ -1,0 +1,6 @@
+.div-title{
+    @apply flex justify-center pt-8 pb-0;
+}
+.title{
+    @apply text-center text-purple-800 font-bold text-2xl;
+}

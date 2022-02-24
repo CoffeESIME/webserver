@@ -1,0 +1,26 @@
+.reg-user{
+  @apply flex flex-col text-center text-indigo-500	text-xl font-bold pt-8 pb-8;
+}
+
+
+.btn {
+    @apply rounded-b-lg shadow-md col-start-2 col-span-4 w-1/4  justify-self-center;
+  }
+.form{
+    @apply grid grid-cols-6 gap-4 justify-center mb-auto;
+}
+
+.label{
+  @apply col-start-2 col-span-2 bg-slate-300 rounded-md text-center w-1/4 justify-self-end;
+}
+
+.input{
+  @apply col-span-2 bg-slate-300 rounded-md w-1/4 focus:bg-slate-100 focus:outline-cyan-500 text-center;
+}
+
+.success{
+  @apply text-center text-cyan-700 font-semibold;
+}
+.error{
+  @apply text-center text-red-600 font-semibold;
+}
