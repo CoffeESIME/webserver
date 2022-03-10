@@ -1,21 +1,38 @@
 import React from "react";
-import axios from "axios";
-
+import {logIn} from '../../services/auth.service';
+import {useNavigate} from 'react-router-dom'
 function LogIn() {
+  const [correo, setCorreo]=React.useState("");
+  const [contraseña, setContraseña] = React.useState("") 
+  let navigate =useNavigate();
+  const handleOnChangeMail=(e)=>{
+    setCorreo(e.target.value);
+  }
+  const handleOnChangePassword=(e)=>{
+    setContraseña(e.target.value)
+  }
+  const handleOnSubmit=(e)=>{
+
+    e.preventDefault();
+    logIn(correo, contraseña).then(
+    ()=>{
+      navigate('/home')
+        }
+    );
+  }
   return (
     <React.Fragment>
-      <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+      <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
         <form>
-          <div class="form-group mb-6">
+          <div className="form-group mb-6">
             <label
-              for="exampleInputEmail2"
-              class="form-label inline-block mb-2 text-gray-700"
+              className="form-label inline-block mb-2 text-gray-700"
             >
               Correo
             </label>
             <input
               type="email"
-              class="form-control
+              className="form-control
         block
         w-full
         px-3
@@ -30,21 +47,22 @@ function LogIn() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              id="exampleInputEmail2"
               aria-describedby="emailHelp"
               placeholder="Enter email"
+              value={correo}
+              onChange={handleOnChangeMail}
             />
           </div>
-          <div class="form-group mb-6">
+          <div className="form-group mb-6">
             <label
-              for="exampleInputPassword2"
-              class="form-label inline-block mb-2 text-gray-700"
+              className="form-label inline-block mb-2 text-gray-700"
+              onChange={handleOnChangePassword}
             >
               Contaseña
             </label>
             <input
               type="password"
-              class="form-control block
+              className="form-control block
         w-full
         px-3
         py-1.5
@@ -58,14 +76,14 @@ function LogIn() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              id="exampleInputPassword2"
               placeholder="Password"
+              value={contraseña}
+              onChange={handleOnChangePassword}
             />
           </div>
-          
+
           <button
-            type="submit"
-            class="
+            className="
       w-full
       px-6
       py-2.5
@@ -83,14 +101,16 @@ function LogIn() {
       transition
       duration-150
       ease-in-out"
+      type="submit"
+      onClick={handleOnSubmit}
           >
             Sign in
           </button>
-          <p class="text-gray-800 mt-6 text-center">
+          <p className="text-gray-800 mt-6 text-center">
             ¿No estas registrado?{" "}
             <a
               href="#!"
-              class="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out"
+              className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out"
             >
               Registrate
             </a>

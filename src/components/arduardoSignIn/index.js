@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
+import { register } from "../../services/auth.service";
 import "./arduardoSignIn.css";
 
 function SignIn() {
@@ -12,7 +11,7 @@ function SignIn() {
   const [password, setPassword] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const handleNombre = (e) => {
     setNombre(e.target.value);
     setSubmitted(false);
@@ -48,12 +47,8 @@ function SignIn() {
     } else {
       setSubmitted(true);
       setError(false);
-      axios.post(`http://192.168.1.73:4000/API/arduardo/new-user`, { name: nombre, last_name: apellido, company:empresa, email:email, password:password })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-      navigate('/')
+      register(nombre, apellido, empresa, email, password);
+      navigate("/log-in");
     }
   };
 
@@ -90,14 +85,12 @@ function SignIn() {
           <h1>Registro de usuarios</h1>
         </div>
 
-        {/* Calling to the methods */}
         <div className="messages">
           {errorMessage()}
           {successMessage()}
         </div>
 
         <form className="form">
-          {/* Labels and inputs for form data */}
           <label className="label">Nombre</label>
           <input
             onChange={handleNombre}
